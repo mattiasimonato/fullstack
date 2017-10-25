@@ -7,7 +7,7 @@ module.exports = function add (ctx) {
   // });
 
   insertLetter({id: 5, name: 'v'}).then((data) => {
-    console.log('ok')
+    ctx.status = 200;
     ctx.response.body = 'ok';
   });
 }

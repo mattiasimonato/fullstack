@@ -22,7 +22,7 @@ module.exports = function add(obj) {
     const addLetter = new Letter(obj)
     addLetter.save((err, letter) => {
       if (err) return rejected(err);
-      resolved('item added');
+      resolved('ok');
     });
 
   });
