@@ -7,8 +7,8 @@ db.on('error', console.error.bind(console, 'connection error'));
 db.once('open', () => { console.log('connected to the db...')})
 
 const letterSchema = mongoose.Schema({
-  id: Number,
-  name: String
+  Phone: Number,
+  message: String,
 });
 
 const Letter = mongoose.model('Letters', letterSchema);
