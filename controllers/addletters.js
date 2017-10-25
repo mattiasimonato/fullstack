@@ -1,11 +1,13 @@
-const insertletter = require('../models/insertdata')
-module.exports = function add (arr) {
+const insertLetter = require('../models/insertdata')
 
-  return new Promise ((resolved, rejected) => {
-    let res = arr.filter(letter => {
-      return typeof letter === 'string'
-    });
-    resolved(res);
-  })
+module.exports = function add (ctx) {
 
+  // let res = arr.filter(letter => {
+  //   return typeof letter === 'string';
+  // });
+
+  insertLetter({id: 5, name: 'v'}).then((data) => {
+    console.log('ok')
+    ctx.response.body = 'ok';
+  });
 }

@@ -17,15 +17,21 @@ const Letter = mongoose.model('Letters', letterSchema);
 
 //const addLetter = new Letter({id: 2, name: "b"})
 
-function add(str) {
-  addLetter.save((err, letter) => {
-    if (err) return console.log(err);
+module.exports = function add(obj) {
+  return new Promise((resolved, rejected) => {
+    const addLetter = new Letter(obj)
+    addLetter.save((err, letter) => {
+      if (err) return rejected(err);
+      resolved('item added');
+    });
+
   });
+
 }
 
 function retrieveAll() {
   Letter.find((err, letter) => {
-    console.log(letter)
+    console.log(letter);
   });
 
 }
