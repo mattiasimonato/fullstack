@@ -15,9 +15,7 @@ const letterSchema = mongoose.Schema({
 
 const Letter = mongoose.model('Letters', letterSchema);
 
-//const addLetter = new Letter({id: 2, name: "b"})
-
-module.exports = function add(obj) {
+function add(obj) {
   return new Promise((resolved, rejected) => {
     const addLetter = new Letter(obj)
     addLetter.save((err, letter) => {
@@ -28,8 +26,16 @@ module.exports = function add(obj) {
 }
 
 function retrieveAll() {
-  Letter.find((err, letter) => {
-    console.log(letter);
-  });
+  return new Promise ((resolved, rejected) => {
+    Letter.find((err, letter) => {
+      if (err) return rejected(err);
+      //ctx.response.body = 'hello';
+      resolved(letter);
+    });
+  })
+}
 
+module.exports = {
+  retrieveAll: retrieveAll,
+  add: add
 }
