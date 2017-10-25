@@ -4,9 +4,7 @@ mongoose.connect('mongodb://localhost/Letters');
 
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error'));
-db.once('open', () => {
-  console.log('connected to the db...');
-})
+db.once('open', () => { console.log('connected to the db...')})
 
 const letterSchema = mongoose.Schema({
   id: Number,
@@ -29,10 +27,9 @@ function retrieveAll() {
   return new Promise ((resolved, rejected) => {
     Letter.find((err, letter) => {
       if (err) return rejected(err);
-      //ctx.response.body = 'hello';
       resolved(letter);
     });
-  })
+  });
 }
 
 module.exports = {

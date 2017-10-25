@@ -7,7 +7,6 @@ const postLetter = require('../controllers/add-letters');
 
 
 router.get('/letter', name);
-
-router.post('/addletter', postLetter);
+router.post('/letter', postLetter);
 
 module.exports = router;
