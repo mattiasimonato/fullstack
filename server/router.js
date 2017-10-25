@@ -13,10 +13,6 @@ router.get('/letter', ctx => {
   })
 });
 
-router.post('/addletter', ctx => {
-  postLetter
-  ctx.status = 200;
-
-});
+router.post('/addletter', postLetter);
 
 module.exports = router;

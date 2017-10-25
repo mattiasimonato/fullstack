@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-
+mongoose.Promise = Promise;
 mongoose.connect('mongodb://localhost/Letters');
 
 const db = mongoose.connection;
@@ -24,9 +24,7 @@ module.exports = function add(obj) {
       if (err) return rejected(err);
       resolved('ok');
     });
-
   });
-
 }
 
 function retrieveAll() {
