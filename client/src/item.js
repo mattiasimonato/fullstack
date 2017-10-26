@@ -3,7 +3,10 @@ import React, { Component } from 'react';
 class Item extends Component {
   render() {
     return (
-      <h1>Hello World from Item</h1>
+      <ul key={this.props.item._id}>
+        <li>{this.props.item.phone}</li>
+        <li>{this.props.item.message}</li>
+      </ul>
     );
   }
 }

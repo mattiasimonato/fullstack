@@ -2,30 +2,35 @@ import React, { Component } from 'react';
 import Item from './item';
 
 class List extends Component {
-  // constructor(props) {
-  //   super(props);
-  //   this.state = {
-  //     items: [],
-  //   }
-  // };
-  //
-  // componentDidMount () {
-  //   fetch('https://movied.herokuapp.com/discover')
-  //   .then(results => {
-  //     return results.json();
-  //   }).then(data => this.setState({items: data.map(movie => {
-  //     item.poster_path = 'https://image.tmdb.org/t/p/w300'.concat(item.poster_path)
-  //     return item;
-  //   })
-  //   }));
-  // }
+  constructor(props) {
+    super(props);
+    this.state = {
+      items: [],
+    }
+  };
+
+  componentDidMount () {
+    fetch('http://localhost:3000/letter')
+    .then(results => {
+      return results.json();
+    }).then(data => this.setState({items: data.map(item => {
+      console.log(item)
+      return item;
+    })
+    }));
+  }
+
+
 
 
   render() {
+    const something = this.state.items.map(item => {
+    return (<Item key={item._id} item={item}/>)
+    });
     return (
       <div>
         <h3>List name</h3>
-        <Item />
+        {something}      
       </div>
     );
   }

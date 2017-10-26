@@ -16,12 +16,6 @@ class Form extends Component {
     })
   }
 
-  getThing() {
-    return fetch('http://localhost:3000/letter')
-    .then(response => response.json())
-    .then(responseJson => console.log(responseJson));
-  }
-
   render() {
     return (
       <div>
