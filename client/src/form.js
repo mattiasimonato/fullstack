@@ -10,7 +10,7 @@ class Form extends Component {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        Phone: phone,
+        phone: phone,
         message: message,
       })
     })

@@ -7,7 +7,7 @@ db.on('error', console.error.bind(console, 'connection error'));
 db.once('open', () => { console.log('connected to the db...')})
 
 const letterSchema = mongoose.Schema({
-  Phone: Number,
+  phone: Number,
   message: String,
 });
 
@@ -32,7 +32,17 @@ function retrieveAll() {
   });
 }
 
+function remove(obj) {
+  return new Promise ((resolved, rejected) => {
+    Letter.remove(obj, function (err) {
+      if (err) return rejected(err);
+      resolved('deleted');
+    });
+  })
+}
+
 module.exports = {
   retrieveAll: retrieveAll,
-  add: add
+  add: add,
+  remove: remove
 }
