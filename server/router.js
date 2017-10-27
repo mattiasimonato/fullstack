@@ -8,5 +8,5 @@ const removeLetter = require('../controllers/remove-letters');
 
 router.get('/letter', name);
 router.post('/letter', postLetter);
-router.del('/letter', removeLetter);
+router.del('/remove-letter/:id', removeLetter);
 module.exports = router;

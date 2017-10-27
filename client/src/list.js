@@ -1,39 +1,54 @@
 import React, { Component } from 'react';
 import Item from './item';
+import { connect } from 'react-redux';
+
+import { listItems } from './actions';
 
 class List extends Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.state = {
       items: [],
     }
+    this.fetchItems();
+    console.log(this.props)
   };
 
-  componentDidMount () {
+  fetchItems () {
     fetch('http://localhost:3000/letter')
     .then(results => {
       return results.json();
-    }).then(data => this.setState({items: data.map(item => {
-      console.log(item)
-      return item;
     })
-    }));
-  }
+    .then(data => {
+      this.props.funzione(data);
+      return data
+    });
+  };
 
 
 
 
   render() {
-    const something = this.state.items.map(item => {
+    const something = this.props.stateToItems.map(item => {
     return (<Item key={item._id} item={item}/>)
     });
     return (
       <div>
         <h3>List name</h3>
-        {something}      
+        {something}
       </div>
     );
   }
 }
 
-export default List;
+const mapStateToProps = (state) => ({
+  stateToItems: state.items
+})
+
+const mapDispatchToProps = (dispatch) => ({
+  funzione: (items) => dispatch(listItems(items))
+})
+
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(List);

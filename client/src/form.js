@@ -1,7 +1,17 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+
+import { postItem } from './actions';
 
 class Form extends Component {
 
+  // set state
+  state = {
+    phone: '',
+    message: '',
+  }
+
+  // post function to database
   postThing (phone, message) {
     fetch('http://localhost:3000/letter', {
       method: 'POST',
@@ -14,24 +24,33 @@ class Form extends Component {
         message: message,
       })
     })
+    //update state in the frontend
+    .then(this.props.postItem({phone: phone, message: message}));
+  }
+
+  // retrieve data from
+  handleChange = (event) => {
+    this.setState({ [event.target.id]: event.target.value });
   }
 
   render() {
     return (
       <div>
         <label htmlFor="phone">Phone
-          <input ref='phoneInput' id="phone" type="number"></input>
+          <input id="phone" type="number" value={this.state.phone} onChange={this.handleChange}></input>
         </label>
         <label htmlFor="message">Message
-          <textarea ref='messageInput' id="message"></textarea>
+          <textarea id="message"  value={this.state.message} onChange={this.handleChange}></textarea>
         </label>
-        <button onClick={() => this.postThing(this.refs.phoneInput.value, this.refs.messageInput.value)}>Post data</button>
-        <button onClick={() => this.getThing()}>Get</button>
+        <button onClick={() => this.postThing(this.state.phone, this.state.message)}>Post data</button>
+        {/* <button onClick={() => this.getThing()}>Get</button> */}
       </div>
     );
   }
 }
 
+const mapDispatchToProps = (dispatch) => ({
+  postItem: (item) => dispatch(postItem(item))
+})
 
-
-export default Form;
+export default connect(null, mapDispatchToProps)(Form);
